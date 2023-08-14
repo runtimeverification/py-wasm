@@ -43,7 +43,6 @@ setup(
     # *IMPORTANT*: Don't manually change the version here. Use `make bump`, as described in readme
     version='0.1.0-alpha.0',
     description="""py-wasm: A python implementation of the web assembly interpreter""",
-    long_description_markdown_filename='README.md',
     author='Jason Carver',
     author_email='ethcalibur+pip@gmail.com',
     url='https://github.com/ethereum/py-wasm',
@@ -54,7 +53,6 @@ setup(
         "toolz>0.9.0,<1;implementation_name=='pypy'",
         "cytoolz>=0.9.0,<1.0.0;implementation_name=='cpython'",
     ],
-    setup_requires=['setuptools-markdown'],
     python_requires='>=3.5, <4',
     extras_require=extras_require,
     py_modules=['wasm'],
