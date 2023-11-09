@@ -7,16 +7,16 @@ from setuptools import (
 
 extras_require = {
     'test': [
-        "pytest==4.1.0",
-        "pytest-watch==4.2.0",
-        "pytest-xdist",
-        "tox>=2.9.1,<3",
-        "hypothesis>=3.88.3,<4",
+        "pytest>=7.4.3,<8",
+        "pytest-watch>=4.2.0,<5",
+        "pytest-xdist>=3.2.0,<4",
+        "tox>=4.11.3,<5",
+        "hypothesis>=6.88.1,<7",
     ],
     'lint': [
         "flake8==3.6.0",
         "isort>=4.3.9,<5",
-        "mypy==0.660",
+        "mypy==1.6.1",
     ],
     'doc': [
         "Sphinx>=1.6.5,<2",
@@ -48,7 +48,7 @@ setup(
     url='https://github.com/ethereum/py-wasm',
     include_package_data=True,
     install_requires=[
-        "mypy_extensions>=0.4.1,<1.0.0",
+        "mypy_extensions>=1.0.0",
         "numpy>=1.16.0,<2",
         "toolz>0.9.0,<1;implementation_name=='pypy'",
         "cytoolz>=0.9.0,<1.0.0;implementation_name=='cpython'",
