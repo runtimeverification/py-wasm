@@ -179,4 +179,9 @@ OPCODE_TO_TEXT: Dict[BinaryOpcode, str] = {
     BinaryOpcode.I64_REINTERPRET_F64: "i64.reinterpret/f64",
     BinaryOpcode.F32_REINTERPRET_I32: "f32.reinterpret/i32",
     BinaryOpcode.F64_REINTERPRET_I64: "f64.reinterpret/i64",
+    BinaryOpcode.I32_EXTEND8_s: "i32.extend8_s",
+    BinaryOpcode.I32_EXTEND16_s: "i32.extend16_s",
+    BinaryOpcode.I64_EXTEND8_s: "i64.extend8_s",
+    BinaryOpcode.I64_EXTEND16_s: "i64.extend16_s",
+    BinaryOpcode.I64_EXTEND32_s: "i64.extend32_s",
 }

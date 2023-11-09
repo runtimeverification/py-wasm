@@ -227,12 +227,22 @@ class UnOp(Interned):
             return cls(opcode, ValType.i32)
         elif opcode is BinaryOpcode.I32_POPCNT:
             return cls(opcode, ValType.i32)
+        elif opcode is BinaryOpcode.I32_EXTEND8_s:
+            return cls(opcode, ValType.i32)
+        elif opcode is BinaryOpcode.I32_EXTEND16_s:
+            return cls(opcode, ValType.i32)
         # i64
         elif opcode is BinaryOpcode.I64_CLZ:
             return cls(opcode, ValType.i64)
         elif opcode is BinaryOpcode.I64_CTZ:
             return cls(opcode, ValType.i64)
         elif opcode is BinaryOpcode.I64_POPCNT:
+            return cls(opcode, ValType.i64)
+        elif opcode is BinaryOpcode.I64_EXTEND8_s:
+            return cls(opcode, ValType.i64)
+        elif opcode is BinaryOpcode.I64_EXTEND16_s:
+            return cls(opcode, ValType.i64)
+        elif opcode is BinaryOpcode.I64_EXTEND32_s:
             return cls(opcode, ValType.i64)
         # f32
         elif opcode is BinaryOpcode.F32_ABS:

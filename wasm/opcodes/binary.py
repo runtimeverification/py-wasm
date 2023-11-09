@@ -279,9 +279,16 @@ class BinaryOpcode(enum.Enum):
     F32_REINTERPRET_I32 = 0xBE  # f32.reinterpret/i32
     F64_REINTERPRET_I64 = 0xBF  # f64.reinterpret/i64
 
+    # Sign extension
+    I32_EXTEND8_s  = 0xC0  # i32.extend8_s
+    I32_EXTEND16_s = 0xC1  # i32.extend16_s
+    I64_EXTEND8_s = 0xC2  # i64.extend8_s
+    I64_EXTEND16_s = 0xC3  # i64.extend16_s
+    I64_EXTEND32_s = 0xC4  # i64.extend32_s
+    
     @property
     def is_numeric(self) -> bool:
-        return 0x41 <= self.value <= 0xbf
+        return 0x41 <= self.value <= 0xc4
 
     @property
     def is_unop(self) -> bool:
@@ -293,6 +300,8 @@ class BinaryOpcode(enum.Enum):
             return True  # f32
         elif 0x99 <= self.value <= 0x9f:
             return True  # f64
+        elif 0xC0 <= self.value <= 0xC4:
+            return True  # sign extension
         else:
             return False
 
