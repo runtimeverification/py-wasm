@@ -20,7 +20,7 @@ import numpy
 from wasm._utils.decorators import (
     to_tuple,
 )
-from wasm._utils.toolz import (
+from toolz import (
     groupby,
 )
 from wasm.datatypes import (

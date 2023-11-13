@@ -33,6 +33,9 @@ lint-roll:
 test:
 	pytest tests
 
+test-binary-parser:
+	pytest tests/binary
+
 test-all:
 	tox
 

@@ -1,43 +1,22 @@
 # py-wasm
 
-[![Join the chat at https://gitter.im/ethereum/py-wasm](https://badges.gitter.im/ethereum/py-wasm.svg)](https://gitter.im/ethereum/py-wasm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://circleci.com/gh/ethereum/py-wasm.svg?style=shield)](https://circleci.com/gh/ethereum/py-wasm)
-[![PyPI version](https://badge.fury.io/py/py-wasm.svg)](https://badge.fury.io/py/py-wasm)
-[![Python versions](https://img.shields.io/pypi/pyversions/py-wasm.svg)](https://pypi.python.org/pypi/py-wasm)
-[![Docs build](https://readthedocs.org/projects/py-wasm/badge/?version=latest)](http://py-wasm.readthedocs.io/en/latest/?badge=latest)
-   
-
-A python implementation of the web assembly interpreter
-
-Read more in the [documentation on ReadTheDocs](https://py-wasm.readthedocs.io/). [View the change log](https://py-wasm.readthedocs.io/en/latest/releases.html).
-
-## Quickstart
-
-```sh
-pip install py-wasm
-```
+This is a fork of the original project that is no longer maintained: [ethereum/py-wasm](https://github.com/ethereum/py-wasm).
+The specific purpose of this fork is to support the [wasm-semantics](https://github.com/runtimeverification/wasm-semantics) project. As of now, our primary focus is on the development and enhancement of the binary parser module to align with the latest WebAssembly standard updates.
 
 ## Developer Setup
-
-If you would like to hack on py-wasm, please check out the
-[Ethereum Development Tactical Manual](https://github.com/pipermerriam/ethereum-dev-tactical-manual)
-for information on how we do:
-
-- Testing
-- Pull Requests
-- Code Style
-- Documentation
-
-### Development Environment Setup
 
 You can set up your dev environment with:
 
 ```sh
-git clone git@github.com:ethereum/py-wasm.git
-cd py-wasm
 virtualenv -p python3 venv
 . venv/bin/activate
 pip install -e .[dev]
+```
+
+Run binary parser tests with:
+
+```sh
+make test-binary-parser
 ```
 
 ### Testing Setup

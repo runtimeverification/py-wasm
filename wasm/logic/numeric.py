@@ -1163,7 +1163,9 @@ def f32demote_op(config: Configuration) -> None:
     if config.enable_logic_fn_logging:
         logger.debug("%s(%s)", config.current_instruction.opcode.text, value)
 
-    config.push_operand(numpy.float32(value))
+
+    with allow_multiple(over=True, under=True, invalid=True):
+        config.push_operand(numpy.float32(value))
 
 
 def f64promote_op(config: Configuration) -> None:
