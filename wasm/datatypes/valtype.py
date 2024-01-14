@@ -54,8 +54,8 @@ class ExternRef:
     value: numpy.uint32
 
 
-RefType = Union[FuncRef, ExternRef]
-
+RefVal = Union[FuncRef, ExternRef]
+RefType = type[RefVal]
 
 class ValType(enum.Enum):
     i32 = numpy.uint32
@@ -301,7 +301,7 @@ class ValType(enum.Enum):
         if self is self.i64:
             return (constants.SINT64_MIN, constants.SINT64_MAX)
         elif self is self.i32:
-            return (constants.SINT32_MIN, constants.SINT32_MAX)
+            return (int(constants.SINT32_MIN), int(constants.SINT32_MAX))
         else:
             raise TypeError(f"Cannot convert {self} to unsigned integer")
 

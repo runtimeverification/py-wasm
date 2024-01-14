@@ -58,10 +58,10 @@ def allow_invalid() -> Iterator[None]:
 
 @contextlib.contextmanager
 def allow_multiple(*,
-                   over: bool = None,
-                   under: bool = None,
-                   divide: bool = None,
-                   invalid: bool = None) -> Iterator[None]:
+                   over: bool | None = None,
+                   under: bool | None = None,
+                   divide: bool | None = None,
+                   invalid: bool | None = None) -> Iterator[None]:
     old_settings = numpy.seterr(
         over='ignore' if over is not None else None,
         under='ignore' if under is not None else None,

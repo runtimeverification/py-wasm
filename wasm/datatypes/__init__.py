@@ -84,6 +84,7 @@ from .table import (  # noqa: F401
     TableType,
 )
 from .valtype import (  # noqa: F401
+    RefVal,
     RefType,
     ValType,
 )

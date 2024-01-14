@@ -13,13 +13,11 @@ from .base import (
 
 @register
 class TableGet(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.TABLE_GET
     tableidx: TableIdx
 
     def __init__(self, tableidx: TableIdx):
-        self.opcode = BinaryOpcode.TABLE_GET
         self.tableidx = tableidx
-
 
     def __str__(self) -> str:
         return f"{self.opcode.text} {self.tableidx}"
@@ -27,11 +25,10 @@ class TableGet(Interned):
 
 @register
 class TableSet(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.TABLE_SET
     tableidx: TableIdx
 
     def __init__(self, tableidx: TableIdx):
-        self.opcode = BinaryOpcode.TABLE_SET
         self.tableidx = tableidx
 
     def __str__(self) -> str:
@@ -40,11 +37,10 @@ class TableSet(Interned):
 
 @register
 class TableSize(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.TABLE_SIZE
     tableidx: TableIdx
 
     def __init__(self, tableidx: TableIdx):
-        self.opcode = BinaryOpcode.TABLE_SIZE
         self.tableidx = tableidx
 
     def __str__(self) -> str:
@@ -53,11 +49,10 @@ class TableSize(Interned):
 
 @register
 class TableGrow(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.TABLE_GROW
     tableidx: TableIdx
 
     def __init__(self, tableidx: TableIdx):
-        self.opcode = BinaryOpcode.TABLE_GROW
         self.tableidx = tableidx
 
     def __str__(self) -> str:
@@ -66,11 +61,10 @@ class TableGrow(Interned):
 
 @register
 class TableFill(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.TABLE_FILL
     tableidx: TableIdx
 
     def __init__(self, tableidx: TableIdx):
-        self.opcode = BinaryOpcode.TABLE_FILL
         self.tableidx = tableidx
 
     def __str__(self) -> str:
@@ -80,12 +74,11 @@ class TableFill(Interned):
 
 @register
 class TableCopy(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.TABLE_COPY
     tableidx1: TableIdx
     tableidx2: TableIdx
 
     def __init__(self, tableidx1: TableIdx, tableidx2: TableIdx):
-        self.opcode = BinaryOpcode.TABLE_COPY
         self.tableidx1 = tableidx1
         self.tableidx2 = tableidx2
 
@@ -95,12 +88,11 @@ class TableCopy(Interned):
 
 @register
 class TableInit(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.TABLE_INIT
     tableidx: TableIdx
     elemidx: ElemIdx
 
     def __init__(self, tableidx: TableIdx, elemidx: ElemIdx):
-        self.opcode = BinaryOpcode.TABLE_INIT
         self.tableidx = tableidx
         self.elemidx = elemidx
 
@@ -110,11 +102,10 @@ class TableInit(Interned):
 
 @register
 class ElemDrop(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.ELEM_DROP
     elemidx: ElemIdx
 
     def __init__(self, elemidx: ElemIdx):
-        self.opcode = BinaryOpcode.ELEM_DROP
         self.elemidx = elemidx
 
     def __str__(self) -> str:

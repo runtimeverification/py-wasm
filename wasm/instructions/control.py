@@ -91,10 +91,6 @@ class BrTable(Interned):
         self.label_indices = label_indices
         self.default_idx = default_idx
 
-    @property
-    def opcode(self) -> BinaryOpcode:
-        return BinaryOpcode.BR_TABLE
-
     def __str__(self) -> str:
         return (
             f"{self.opcode.text}["

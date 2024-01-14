@@ -21,12 +21,11 @@ from .base import (
 
 @register
 class RefNull(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.REF_NULL
     reftype: RefType
 
     def __init__(self, reftype: RefType):
-        self.opcode = BinaryOpcode.REF_FUNC
-        self.reftype = RefType
+        self.reftype = reftype
 
     def __str__(self) -> str:
         return f"{self.opcode.text} {self.reftype}]"
@@ -34,10 +33,10 @@ class RefNull(Interned):
 
 @register
 class RefIsNull(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.REF_IS_NULL
 
     def __init__(self):
-        self.opcode = BinaryOpcode.REF_IS_NULL
+        return
         
     def __str__(self) -> str:
         return f"{self.opcode.text}"
@@ -45,11 +44,10 @@ class RefIsNull(Interned):
 
 @register
 class RefFunc(Interned):
-    opcode: BinaryOpcode
+    opcode: BinaryOpcode = BinaryOpcode.REF_FUNC
     funcidx: FunctionIdx
 
     def __init__(self, funcidx: FunctionIdx):
-        self.opcode = BinaryOpcode.REF_FUNC
         self.funcidx = funcidx
   
     def __str__(self) -> str:
