@@ -1,2 +1,12 @@
 (module
-  (table 1 funcref))
+  (table $t1 0 funcref)
+  (table 1 funcref)
+  (table 0 0 funcref)
+  (table 0 1 funcref)
+  (table 1 1000 funcref)
+  (table 0 externref)
+  (table 1 externref)
+  (table 0 0 externref)
+  (table 0 1 externref)
+  (table 1 1000 externref)
+)

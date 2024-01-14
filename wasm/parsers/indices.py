@@ -9,6 +9,7 @@ from wasm.datatypes import (
     TableIdx,
     TypeIdx,
 )
+from wasm.datatypes.indices import ElemIdx
 
 from .integers import (
     parse_u32,
@@ -62,6 +63,12 @@ def parse_table_idx(stream: IO[bytes]) -> TableIdx:
     raw_idx = parse_u32(stream)
     return TableIdx(raw_idx)
 
+def parse_elem_idx(stream: IO[bytes]) -> ElemIdx:
+    """
+    Parser for the ElemIdx type
+    """
+    raw_idx = parse_u32(stream)
+    return ElemIdx(raw_idx)
 
 def parse_type_idx(stream: IO[bytes]) -> TypeIdx:
     """

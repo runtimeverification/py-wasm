@@ -1,6 +1,7 @@
 from typing import IO
 
 from wasm.datatypes import (
+    RefType,
     ValType,
 )
 from wasm.exceptions import (
@@ -24,3 +25,9 @@ def parse_valtype(stream: IO[bytes]) -> ValType:
         raise MalformedModule(
             f"Invalid byte while parsing valtype.  Got '{hex(byte)}: {str(err)}"
         )
+
+def parse_reftype(stream) -> ValType:
+    valtype = parse_valtype(stream)
+    if valtype.is_reference_type:
+        return valtype
+    raise MalformedModule(f"Invalid byte while parsing reftype.  Got '{valtype}")

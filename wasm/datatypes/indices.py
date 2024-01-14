@@ -22,5 +22,8 @@ class TableIdx(int):
     pass
 
 
+class ElemIdx(int):
+    pass
+
 class TypeIdx(int):
     pass

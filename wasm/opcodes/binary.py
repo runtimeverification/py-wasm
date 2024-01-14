@@ -24,6 +24,17 @@ class BinaryOpcode(enum.Enum):
         return 0x00 <= self.value <= 0x11
 
     #
+    # Reference
+    #
+    REF_NULL = 0xD0
+    REF_IS_NULL = 0xD1
+    REF_FUNC = 0xD2
+
+    @property
+    def is_reference(self):
+        return 0xD0 <= self.value <= 0xD2
+
+    #
     # Parametric: 5.4.2
     #
     DROP = 0x1A  # drop
@@ -53,6 +64,22 @@ class BinaryOpcode(enum.Enum):
     @property
     def is_global(self) -> bool:
         return self is self.GET_GLOBAL or self is self.SET_GLOBAL
+
+    #
+    # Table
+    #
+    TABLE_GET = 0x25
+    TABLE_SET = 0x26
+    TABLE_INIT = (0xFC << 32) + 12
+    ELEM_DROP = (0xFC << 32) + 13
+    TABLE_COPY = (0xFC << 32) + 14
+    TABLE_GROW = (0xFC << 32) + 15
+    TABLE_SIZE = (0xFC << 32) + 16
+    TABLE_FILL = (0xFC << 32) + 17
+
+    @property
+    def is_table(self):
+        return (0x25 <= self.value <= 0x26) or (self.TABLE_INIT.value <= self.value <= self.TABLE_FILL.value)
 
     #
     # Memory: 5.4.5

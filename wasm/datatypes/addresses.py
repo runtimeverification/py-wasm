@@ -6,6 +6,7 @@ from typing import (
 
 TAddress = Union[
     'FunctionAddress',
+    'ExternAddress',
     'GlobalAddress',
     'MemoryAddress',
     'TableAddress',
@@ -16,6 +17,12 @@ class FunctionAddress(int):
     @staticmethod
     def filter(values: Iterable[TAddress]) -> Tuple['FunctionAddress', ...]:
         return tuple(address for address in values if isinstance(address, FunctionAddress))
+
+
+class ExternAddress(int):
+    @staticmethod
+    def filter(values: Iterable[TAddress]) -> Tuple['ExternAddress', ...]:
+        return tuple(address for address in values if isinstance(address, ExternAddress))
 
 
 class TableAddress(int):

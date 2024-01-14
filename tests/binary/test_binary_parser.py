@@ -10,7 +10,7 @@ from wasm.parsers import parse_module
 BINARY_DIR = Path(__file__).parent / 'data'
 BINARY_WAT_FILES = BINARY_DIR.glob('*.wat')
 
-sys.setrecursionlimit(1500000000)
+sys.setrecursionlimit(100000)
 
 
 @pytest.mark.parametrize('wat_path', BINARY_WAT_FILES, ids=str)

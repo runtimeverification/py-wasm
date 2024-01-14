@@ -1,3 +1,5 @@
+from abc import ABC
+from dataclasses import dataclass
 import enum
 from typing import (
     Tuple,
@@ -27,15 +29,32 @@ UINT64_BYTE = numpy.uint8(0x7e)
 FLOAT64_BYTE = numpy.uint8(0x7c)
 UINT32_BYTE = numpy.uint8(0x7f)
 FLOAT32_BYTE = numpy.uint8(0x7d)
+FUNCREF_BYTE = numpy.uint8(0x70)
+EXTERNREF_BYTE = numpy.uint8(0x6f)
 
 UINT64_STR = 'i64'
 FLOAT64_STR = 'f64'
 UINT32_STR = 'i32'
 FLOAT32_STR = 'f32'
+FUNCREF_STR = 'funcref'
+EXTERNREF_STR = 'externref'
 
 
 AnyInteger = Union[int, numpy.int32, numpy.int64, numpy.uint32, numpy.uint64]
 AnySignedInteger = Union[int, numpy.int32, numpy.int64]
+
+
+@dataclass()
+class FuncRef:
+    value: numpy.uint32
+
+
+@dataclass()
+class ExternRef:
+    value: numpy.uint32
+
+
+RefType = Union[FuncRef, ExternRef]
 
 
 class ValType(enum.Enum):
@@ -43,6 +62,8 @@ class ValType(enum.Enum):
     i64 = numpy.uint64
     f32 = numpy.float32
     f64 = numpy.float64
+    funcref = FuncRef
+    externref = ExternRef
 
     def __str__(self) -> str:
         if self is self.i32:
@@ -53,6 +74,10 @@ class ValType(enum.Enum):
             return 'f32'
         elif self is self.f64:
             return 'f64'
+        elif self is self.funcref:
+            return 'funcref'
+        elif self is self.externref:
+            return 'externref'
         else:
             raise Exception("Invariant")
 
@@ -69,10 +94,14 @@ class ValType(enum.Enum):
             return cls.i32
         elif byte == FLOAT32_BYTE:
             return cls.f32
+        elif byte == FUNCREF_BYTE:
+            return cls.funcref
+        elif byte == EXTERNREF_BYTE:
+            return cls.externref
         else:
             raise ValueError(
                 "Provided byte does not map to a value type.  Got "
-                f"'{hex(byte)}'. Must be one of 0x7f|0x7e|0x7d|0x7c"
+                f"'{hex(byte)}'. Must be one of 0x7f|0x7e|0x7d|0x7c|0x70|0x6f"
             )
 
     @classmethod
@@ -85,6 +114,10 @@ class ValType(enum.Enum):
             return cls.f64
         elif type_str == FLOAT32_STR:
             return cls.f32
+        elif type_str == FUNCREF_STR:
+            return cls.funcref
+        elif type_str == EXTERNREF_STR:
+            return cls.externref
         else:
             raise ValueError(
                 f"No ValType match for provided type string: '{type_str}'"
@@ -99,6 +132,10 @@ class ValType(enum.Enum):
             return UINT32_BYTE
         elif self is self.f32:
             return FLOAT32_BYTE
+        elif self is self.funcref:
+            return FUNCREF_BYTE
+        elif self is self.externref:
+            return EXTERNREF_BYTE
         else:
             raise Exception("Invariant")
 
@@ -111,6 +148,10 @@ class ValType(enum.Enum):
         return self in {self.f32, self.f64}
 
     @property
+    def is_reference_type(self) -> bool:
+        return self in {self.funcref, self.externref}
+
+    @property
     def bit_size(self) -> BitSize:
         if self is self.i64:
             return BitSize.b64
@@ -120,6 +161,10 @@ class ValType(enum.Enum):
             return BitSize.b32
         elif self is self.f32:
             return BitSize.b32
+        # elif self is self.funcref:
+        #     return BitSize.b32
+        # elif self is self.externref:
+        #     return BitSize.b32
         else:
             raise Exception("Invariant")
 
