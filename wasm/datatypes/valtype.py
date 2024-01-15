@@ -152,10 +152,6 @@ class ValType(enum.Enum):
             return BitSize.b32
         elif self is self.f32:
             return BitSize.b32
-        # elif self is self.funcref:
-        #     return BitSize.b32
-        # elif self is self.externref:
-        #     return BitSize.b32
         else:
             raise Exception("Invariant")
 
