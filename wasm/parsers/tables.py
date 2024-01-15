@@ -60,6 +60,10 @@ def parse_table(stream: IO[bytes]) -> Table:
 
 
 def parse_table_instruction(opcode: BinaryOpcode, stream: IO[bytes]) -> Instruction:
+    """
+    https://webassembly.github.io/spec/core/binary/instructions.html#table-instructions
+    """
+
     if opcode is BinaryOpcode.TABLE_GET:
         tableidx = parse_table_idx(stream)
         return TableGet(tableidx)

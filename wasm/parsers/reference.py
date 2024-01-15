@@ -8,6 +8,10 @@ from wasm.parsers.valtype import parse_reftype
 
 
 def parse_reference_instruction(opcode: BinaryOpcode, stream: IO[bytes]) -> Instruction:
+    """
+    https://webassembly.github.io/spec/core/binary/instructions.html#reference-instructions
+    """
+
     if opcode is BinaryOpcode.REF_NULL:
         reftype = parse_reftype(stream)
         return RefNull(reftype)

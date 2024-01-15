@@ -1,3 +1,6 @@
+# Table Instructions
+# https://webassembly.github.io/spec/core/syntax/instructions.html#table-instructions
+
 from wasm._utils.interned import (
     Interned,
 )

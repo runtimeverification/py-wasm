@@ -23,6 +23,8 @@ def parse_element_kind(stream: IO[bytes]) -> RefType:
 def parse_element_segment(stream: IO[bytes]) -> ElementSegment:
     """
     Parser for the ElementSegment type.
+    
+    https://webassembly.github.io/spec/core/binary/modules.html#element-section
     """
 
     def idxs_to_exprs(idxs: Iterable[FunctionIdx]) -> tuple[Iterable[BaseInstruction], ...]:
