@@ -12,6 +12,7 @@ import numpy
 from wasm import (
     constants,
 )
+from .addresses import FunctionAddress, ExternAddress
 from wasm.exceptions import (
     ValidationError,
 )
@@ -44,17 +45,7 @@ AnyInteger = Union[int, numpy.int32, numpy.int64, numpy.uint32, numpy.uint64]
 AnySignedInteger = Union[int, numpy.int32, numpy.int64]
 
 
-@dataclass()
-class FuncRef:
-    value: numpy.uint32
-
-
-@dataclass()
-class ExternRef:
-    value: numpy.uint32
-
-
-RefVal = Union[FuncRef, ExternRef]
+RefVal = Union[FunctionAddress, ExternAddress]
 RefType = type[RefVal]
 
 class ValType(enum.Enum):
@@ -62,8 +53,8 @@ class ValType(enum.Enum):
     i64 = numpy.uint64
     f32 = numpy.float32
     f64 = numpy.float64
-    funcref = FuncRef
-    externref = ExternRef
+    funcref = FunctionAddress
+    externref = ExternAddress
 
     def __str__(self) -> str:
         if self is self.i32:

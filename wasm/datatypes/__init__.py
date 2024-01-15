@@ -1,5 +1,6 @@
 from .addresses import (  # noqa: F401
     FunctionAddress,
+    ExternAddress,
     GlobalAddress,
     MemoryAddress,
     TableAddress,

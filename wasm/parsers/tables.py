@@ -5,10 +5,11 @@ from typing import (
 
 from wasm.datatypes import (
     FunctionAddress,
+    ExternAddress,
     Table,
     TableType,
 )
-from wasm.datatypes.valtype import ExternRef, FuncRef, RefType
+from wasm.datatypes.valtype import RefType
 from wasm.exceptions import (
     MalformedModule,
 )
@@ -32,9 +33,9 @@ def parse_table_element_type(stream: IO[bytes]) -> RefType:
     type_flag = parse_single_byte(stream)
 
     if type_flag == 0x70:
-        return FuncRef
+        return FunctionAddress
     if type_flag == 0x6F:
-        return ExternRef
+        return ExternAddress
     else:
         raise MalformedModule(
             f"Unrecognized table element type: {hex(type_flag)}"

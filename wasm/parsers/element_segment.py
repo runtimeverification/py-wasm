@@ -3,7 +3,7 @@ from typing import IO, Iterable, cast
 from wasm.datatypes import ElementSegment
 from wasm.datatypes.element_segment import ElemModeActive, ElemModeDeclarative, ElemModePassive
 from wasm.datatypes.indices import FunctionIdx, TableIdx
-from wasm.datatypes.valtype import FuncRef, RefType, ValType
+from wasm.datatypes.valtype import FunctionAddress, RefType
 from wasm.instructions.base import BaseInstruction
 from wasm.instructions.reference import RefFunc
 from wasm.parsers.integers import parse_u32
@@ -17,7 +17,7 @@ from .vector import parse_vector
 
 def parse_element_kind(stream: IO[bytes]) -> RefType:
     parse_null_byte(stream)
-    return FuncRef
+    return FunctionAddress
 
 
 def parse_element_segment(stream: IO[bytes]) -> ElementSegment:
@@ -39,7 +39,7 @@ def parse_element_segment(stream: IO[bytes]) -> ElementSegment:
         idxs = parse_vector(parse_function_idx, stream)
         init = idxs_to_exprs(idxs)
         mode = ElemModeActive(TableIdx(0), offset)
-        return ElementSegment(FuncRef, init, mode)
+        return ElementSegment(FunctionAddress, init, mode)
     if choice == 1:
         type = parse_element_kind(stream)
         idxs = parse_vector(parse_function_idx, stream)
@@ -62,7 +62,7 @@ def parse_element_segment(stream: IO[bytes]) -> ElementSegment:
         offset = parse_expression(stream)
         init = parse_vector(parse_expression, stream)
         mode = ElemModeActive(TableIdx(0), offset)
-        return ElementSegment(FuncRef, init, mode)
+        return ElementSegment(FunctionAddress, init, mode)
     if choice == 5:
         type = parse_reftype(stream)
         init = parse_vector(parse_expression, stream)
