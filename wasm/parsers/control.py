@@ -37,6 +37,7 @@ from .blocks import (
 from .indices import (
     parse_function_idx,
     parse_label_idx,
+    parse_table_idx,
     parse_type_idx,
 )
 from .null import (
@@ -184,6 +185,6 @@ def parse_call_indirect_instruction(stream: IO[bytes]) -> CallIndirect:
     Parser for the CALL_INDIRECT instruction
     """
     type_idx = parse_type_idx(stream)
-    parse_null_byte(stream)
+    table_idx = parse_table_idx(stream)
 
-    return CallIndirect(type_idx)
+    return CallIndirect(table_idx, type_idx)

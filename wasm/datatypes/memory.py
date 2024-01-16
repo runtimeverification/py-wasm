@@ -34,7 +34,7 @@ class MemoryInstance:
     max: Optional[numpy.uint32]
     _length_cache: int
 
-    def __init__(self, data: bytearray, max: numpy.uint32 = None) -> None:
+    def __init__(self, data: bytearray, max: numpy.uint32 | None = None) -> None:
         self.data = data
         self.max = max
         self._length_cache = len(self.data)

@@ -31,7 +31,7 @@ def parse_locals(stream: IO[bytes]) -> LocalsMeta:
     """
     num = parse_u32(stream)
     valtype = parse_valtype(stream)
-    return LocalsMeta(num, valtype)
+    return LocalsMeta(int(num), valtype)
 
 
 def parse_code(stream: IO[bytes]) -> Code:

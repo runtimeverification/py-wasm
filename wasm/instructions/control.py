@@ -12,6 +12,7 @@ from wasm._utils.interned import (
 from wasm.datatypes import (
     FunctionIdx,
     LabelIdx,
+    TableIdx,
     TypeIdx,
     ValType,
 )
@@ -89,10 +90,6 @@ class BrTable(Interned):
                  default_idx: LabelIdx) -> None:
         self.label_indices = label_indices
         self.default_idx = default_idx
-
-    @property
-    def opcode(self) -> BinaryOpcode:
-        return BinaryOpcode.BR_TABLE
 
     def __str__(self) -> str:
         return (
@@ -172,7 +169,8 @@ class End(SimpleOp):
 class CallIndirect(Interned):
     opcode = BinaryOpcode.CALL_INDIRECT
 
-    def __init__(self, type_idx: TypeIdx) -> None:
+    def __init__(self, table_idx: TableIdx, type_idx: TypeIdx) -> None:
+        self.table_idx = table_idx
         self.type_idx = type_idx
 
     def __str__(self) -> str:

@@ -1,8 +1,13 @@
+from abc import ABC
+from dataclasses import dataclass
 from typing import (
     TYPE_CHECKING,
+    Iterable,
     NamedTuple,
     Tuple,
 )
+
+from wasm.datatypes.valtype import RefType
 
 from .indices import (
     FunctionIdx,
@@ -14,8 +19,25 @@ if TYPE_CHECKING:
         BaseInstruction,
     )
 
+class ElemMode(ABC):
+    pass
+
+@dataclass(frozen=True)
+class ElemModeActive(ElemMode):
+    table: TableIdx
+    offset: Tuple['BaseInstruction', ...]
+
+
+@dataclass(frozen=True)
+class ElemModePassive(ElemMode):
+    pass
+
+
+@dataclass(frozen=True)
+class ElemModeDeclarative(ElemMode):
+    pass
 
 class ElementSegment(NamedTuple):
-    table_idx: TableIdx
-    offset: Tuple['BaseInstruction', ...]
-    init: Tuple[FunctionIdx, ...]
+    type: RefType
+    init: Tuple[Iterable['BaseInstruction'], ...]
+    mode: ElemMode

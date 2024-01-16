@@ -1,5 +1,6 @@
 from .addresses import (  # noqa: F401
     FunctionAddress,
+    ExternAddress,
     GlobalAddress,
     MemoryAddress,
     TableAddress,
@@ -84,6 +85,8 @@ from .table import (  # noqa: F401
     TableType,
 )
 from .valtype import (  # noqa: F401
+    RefVal,
+    RefType,
     ValType,
 )
 

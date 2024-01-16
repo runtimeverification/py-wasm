@@ -2,6 +2,19 @@ from typing import (
     Union,
 )
 
+from .table import (
+    ElemDrop,
+    TableCopy,
+    TableFill,
+    TableGet,
+    TableGrow,
+    TableInit,
+    TableSet,
+    TableSize,
+)
+
+from .reference import RefFunc, RefIsNull, RefNull
+
 from .control import (  # noqa: F401
     BaseInstruction,
     Block,
@@ -87,4 +100,15 @@ Instruction = Union[
     Nop,
     Unreachable,
     Return,
+    RefFunc,
+    RefIsNull,
+    RefNull,
+    TableGet,
+    TableSet,
+    TableSize,
+    TableGrow,
+    TableFill,
+    TableCopy,
+    TableInit,
+    ElemDrop,
 ]

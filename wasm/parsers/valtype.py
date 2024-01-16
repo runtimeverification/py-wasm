@@ -1,8 +1,10 @@
 from typing import IO
 
 from wasm.datatypes import (
+    RefType,
     ValType,
 )
+from wasm.datatypes.addresses import ExternAddress, FunctionAddress
 from wasm.exceptions import (
     MalformedModule,
 )
@@ -24,3 +26,11 @@ def parse_valtype(stream: IO[bytes]) -> ValType:
         raise MalformedModule(
             f"Invalid byte while parsing valtype.  Got '{hex(byte)}: {str(err)}"
         )
+
+def parse_reftype(stream) -> RefType:
+    valtype = parse_valtype(stream)
+    if valtype is ValType.funcref:
+        return FunctionAddress
+    if valtype is ValType.externref:
+        return ExternAddress
+    raise MalformedModule(f"Invalid byte while parsing reftype.  Got '{valtype}")

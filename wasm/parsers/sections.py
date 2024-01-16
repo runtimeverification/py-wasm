@@ -302,10 +302,10 @@ def _parse_sections(stream: IO[bytes]) -> Iterable[SECTION_TYPES]:
                 f"already encountered sections {all_seen}"
             )
 
-        seen_section_ids.add(section_id)
+        seen_section_ids.add(int(section_id))
 
         for _, empty_section in _next_empty_section(section_id, empty_section_iter):
-            missing_section_ids.add(section_id)
+            missing_section_ids.add(int(section_id))
             yield empty_section
 
         section_parser_fn = PARSERS_BY_SECTION_ID[section_id]
