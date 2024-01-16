@@ -41,6 +41,8 @@ def parse_instruction(stream: IO[bytes]) -> Instruction:
     except IndexError:
         raise Exception("TODO: end of stream, what is the right exception here")
 
+    # '0xFC' is a special opcode shared by several instructions.
+    # These instructions are distinguished by a u32 value following the opcode.
     if opcode_value == 0xFC:
         try:
             additional_value = parse_u32(stream)
