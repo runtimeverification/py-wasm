@@ -13,6 +13,7 @@ from wasm.datatypes import (
     BitSize,
     ValType,
 )
+from wasm.datatypes.indices import MemoryIdx
 from wasm.opcodes import (
     BinaryOpcode,
 )
@@ -127,3 +128,29 @@ class MemorySize(SimpleOp):
 @register
 class MemoryGrow(SimpleOp):
     opcode = BinaryOpcode.MEMORY_GROW
+
+@register
+class MemoryCopy(Interned):
+    opcode: BinaryOpcode = BinaryOpcode.MEMORY_COPY
+    x1: MemoryIdx
+    x2: MemoryIdx
+
+    def __init__(self, x1: MemoryIdx, x2: MemoryIdx):
+        self.x1 = x1
+        self.x2 = x2
+    
+
+    def __str__(self) -> str:
+        return f"{self.opcode.text} {self.x1} {self.x2}"
+
+@register
+class MemoryFill(Interned):
+    opcode: BinaryOpcode = BinaryOpcode.MEMORY_FILL
+    x1: MemoryIdx
+
+    def __init__(self, x1: MemoryIdx):
+        self.x1 = x1
+    
+
+    def __str__(self) -> str:
+        return f"{self.opcode.text} {self.x1}"

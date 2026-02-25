@@ -109,10 +109,12 @@ class BinaryOpcode(enum.Enum):
     I64_STORE32 = 0x3E  # i64.store32  # memarg
     MEMORY_SIZE = 0x3F  # memory.size
     MEMORY_GROW = 0x40  # memory.grow
+    MEMORY_COPY = (0xFC << 32) + 10 # memory.copy
+    MEMORY_FILL = (0xFC << 32) + 11 # memory.fill
 
     @property
     def is_memory(self) -> bool:
-        return 0x28 <= self.value <= 0x40
+        return (0x28 <= self.value <= 0x40) or (self.MEMORY_COPY.value <= self.value <= self.MEMORY_FILL.value)
 
     @property
     def is_memory_load(self) -> bool:

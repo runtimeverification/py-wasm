@@ -1,7 +1,7 @@
 (module
   (memory 0)
   (table 100 funcref)
-  (elem funcref)
+  (elem func $f)
   (global (mut i32) (i32.const 0))
   (func (param i32 i64) (local f64))
   (func $f)
@@ -153,6 +153,8 @@
         i64.store32 offset=10        drop
         memory.size
         memory.grow
+        memory.copy
+        memory.fill
         ;; --
         unreachable
 

@@ -34,6 +34,8 @@ from .control import (  # noqa: F401
 from .memory import (  # noqa: F401
     MemoryAction,
     MemoryArg,
+    MemoryCopy,
+    MemoryFill,
     MemoryGrow,
     MemoryOp,
     MemorySize,
@@ -85,6 +87,8 @@ Instruction = Union[
     MemoryOp,
     MemoryGrow,
     MemorySize,
+    MemoryCopy,
+    MemoryFill,
     Drop,
     Select,
     Block,

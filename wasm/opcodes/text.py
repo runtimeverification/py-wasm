@@ -63,6 +63,8 @@ OPCODE_TO_TEXT: Dict[BinaryOpcode, str] = {
     BinaryOpcode.I64_STORE32: "i64.store32",
     BinaryOpcode.MEMORY_SIZE: "memory.size",
     BinaryOpcode.MEMORY_GROW: "memory.grow",
+    BinaryOpcode.MEMORY_COPY: "memory.copy",
+    BinaryOpcode.MEMORY_FILL: "memory.fill",
     BinaryOpcode.I32_CONST: "i32.const",
     BinaryOpcode.I64_CONST: "i64.const",
     BinaryOpcode.F32_CONST: "f32.const",

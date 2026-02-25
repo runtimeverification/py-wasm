@@ -10,10 +10,13 @@ from wasm.instructions import (
     MemoryGrow,
     MemoryOp,
     MemorySize,
+    MemoryCopy,
+    MemoryFill,
 )
 from wasm.opcodes import (
     BinaryOpcode,
 )
+from wasm.parsers.indices import parse_memory_idx
 
 from .integers import (
     parse_u32,
@@ -41,6 +44,13 @@ def parse_memory_instruction(opcode: BinaryOpcode,
     elif opcode is BinaryOpcode.MEMORY_GROW:
         parse_null_byte(stream)
         return MemoryGrow()
+    elif opcode is BinaryOpcode.MEMORY_COPY:
+        x1 = parse_memory_idx(stream)
+        x2 = parse_memory_idx(stream)
+        return MemoryCopy(x1, x2)
+    elif opcode is BinaryOpcode.MEMORY_FILL:
+        x1 = parse_memory_idx(stream)
+        return MemoryFill(x1)
     else:
         raise Exception("Invariant")
 
