@@ -5,6 +5,7 @@
   (global (mut i32) (i32.const 0))
   (func (param i32 i64) (local f64))
   (func $f)
+  (elem func $f)
   (global funcref (ref.func $f))
   (func (local i32)
         ;; `unreachable` and `drop` are inserted as needed to
