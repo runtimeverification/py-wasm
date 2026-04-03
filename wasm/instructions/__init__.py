@@ -2,6 +2,8 @@ from typing import (
     Union,
 )
 
+from .base import InstructionWithPos
+
 from .table import (
     ElemDrop,
     TableCopy,
@@ -67,6 +69,7 @@ from .variable import (  # noqa: F401
 
 Instruction = Union[
     BaseInstruction,
+    InstructionWithPos,
     I32Const, I64Const,
     F32Const, F64Const,
     UnOp,

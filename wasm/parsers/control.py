@@ -27,6 +27,7 @@ from wasm.instructions import (
     Return,
     Unreachable,
 )
+from wasm.instructions.base import InstructionWithPos
 from wasm.opcodes import (
     BinaryOpcode,
 )
@@ -102,10 +103,14 @@ def parse_inner_block_instructions(stream: IO[bytes]) -> Iterable[BaseInstructio
     from wasm.parsers.instructions import parse_instruction  # noqa: F401
 
     while True:
-        instruction = cast(BaseInstruction, parse_instruction(stream))
-        yield instruction
+        instruction = parse_instruction(stream)
+        base_instruction = cast(BaseInstruction, instruction)
+        yield base_instruction
         if isinstance(instruction, End):
             break
+        if isinstance(instruction, InstructionWithPos):
+            if isinstance(instruction.instruction, End):
+                break
 
 
 def parse_loop_instruction(stream: IO[bytes]) -> Loop:
