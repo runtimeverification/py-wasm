@@ -35,9 +35,10 @@ def register(cls: Type[TInstruction]) -> Type[TInstruction]:
 
 @register
 class InstructionWithPos(NamedTuple):
-    pos: tuple[int, int]
     instruction: BaseInstruction
-
+    offset: int
+    length: int
+    
     @property
     def opcode(self) -> BinaryOpcode:
         return self.instruction.opcode

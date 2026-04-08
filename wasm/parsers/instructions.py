@@ -36,13 +36,13 @@ def parse_instruction(stream: IO[bytes]) -> Instruction:
     Parse a single instruction with it's position.
     """
 
-    pos_start = stream.tell()
+    offset = stream.tell()
 
     instruction = parse_instruction_without_pos(stream)
 
-    pos_end = stream.tell()
+    length = stream.tell() - offset
 
-    return InstructionWithPos((pos_start, pos_end), instruction)
+    return InstructionWithPos(instruction=instruction, offset=offset, length=length)
     
 
 def parse_instruction_without_pos(stream: IO[bytes]) -> Instruction:
