@@ -1,6 +1,7 @@
 from abc import ABC
 from typing import (
     Any,
+    NamedTuple,
     Type,
     TypeVar,
 )
@@ -31,6 +32,16 @@ def register(cls: Type[TInstruction]) -> Type[TInstruction]:
     """
     BaseInstruction.register(cls)
     return cls
+
+@register
+class InstructionWithPos(NamedTuple):
+    instruction: BaseInstruction
+    offset: int
+    length: int
+    
+    @property
+    def opcode(self) -> BinaryOpcode:
+        return self.instruction.opcode
 
 
 class SimpleOp(Interned):

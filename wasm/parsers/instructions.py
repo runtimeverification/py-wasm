@@ -5,6 +5,7 @@ from wasm.exceptions import (
 )
 from wasm.instructions import (
     Instruction,
+    InstructionWithPos,
 )
 from wasm.opcodes import (
     BinaryOpcode,
@@ -31,6 +32,20 @@ from .variable import (
 
 
 def parse_instruction(stream: IO[bytes]) -> Instruction:
+    """
+    Parse a single instruction with it's position.
+    """
+
+    offset = stream.tell()
+
+    instruction = parse_instruction_without_pos(stream)
+
+    length = stream.tell() - offset
+
+    return InstructionWithPos(instruction=instruction, offset=offset, length=length)
+    
+
+def parse_instruction_without_pos(stream: IO[bytes]) -> Instruction:
     """
     Parse a single instruction.
     """
