@@ -106,11 +106,8 @@ def parse_inner_block_instructions(stream: IO[bytes]) -> Iterable[BaseInstructio
         instruction = parse_instruction(stream)
         base_instruction = cast(BaseInstruction, instruction)
         yield base_instruction
-        if isinstance(instruction, End):
+        if instruction.opcode == BinaryOpcode.END:
             break
-        if isinstance(instruction, InstructionWithPos):
-            if isinstance(instruction.instruction, End):
-                break
 
 
 def parse_loop_instruction(stream: IO[bytes]) -> Loop:
@@ -130,7 +127,7 @@ def parse_if_instruction(stream: IO[bytes]) -> If:
     result_type = parse_blocktype(stream)
 
     all_instructions = parse_inner_block_instructions(stream)
-    partitioned_instructions = tuple(partitionby(lambda v: isinstance(v, Else), all_instructions))
+    partitioned_instructions = tuple(partitionby(lambda v: v.opcode == BinaryOpcode.ELSE, all_instructions))
 
     if len(partitioned_instructions) == 1:  # if without else
         if_instructions = all_instructions
